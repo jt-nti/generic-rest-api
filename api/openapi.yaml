@@ -1,0 +1,34 @@
+openapi: 3.0.0
+info:
+  title: Generic Hyperledger Fabric API
+  description: Contract agnostic REST API for experimenting with Fabric networks
+  version: 0.1.0
+tags:
+  - name: blocks
+    description: Block and awe
+  - name: transactions
+    description: Transaction-tastic
+paths:
+  /blocks:
+    get:
+      tags:
+        - blocks
+      summary: Returns a list of the most recent blocks
+      responses:
+        '200':
+          description: Success
+  /transactions:
+    get:
+      tags:
+        - transactions
+      summary: Returns a list of the most recent transactions
+      responses:
+        '200':
+          description: Success
+    post:
+      tags:
+        - transactions
+      summary: Submits a new transaction
+      responses:
+        '202':
+          description: Transaction submitted
