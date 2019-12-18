@@ -6,6 +6,8 @@ info:
 tags:
   - name: blocks
     description: Block and awe
+  - name: connection
+    description: Connect! Connect!
   - name: transactions
     description: Transaction-tastic
 paths:
@@ -14,6 +16,21 @@ paths:
       tags:
         - blocks
       summary: Returns a list of the most recent blocks
+      responses:
+        '200':
+          description: Success
+  /connection:
+    get:
+      tags:
+        - connection
+      summary: Returns the current connection profile
+      responses:
+        '200':
+          description: Success
+    put:
+      tags:
+        - connection
+      summary: Replaces the current connection profile
       responses:
         '200':
           description: Success
