@@ -27,13 +27,6 @@ paths:
       responses:
         '200':
           description: Success
-    put:
-      tags:
-        - connection
-      summary: Replaces the current connection profile
-      responses:
-        '200':
-          description: Success
   /transactions:
     get:
       tags:
