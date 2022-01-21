@@ -8,6 +8,10 @@ tags:
     description: Block and awe
   - name: connection
     description: Connect! Connect!
+  - name: jobs
+    description: All work and no play
+  - name: metadata
+    description: About that
   - name: transactions
     description: Transaction-tastic
 paths:
@@ -27,6 +31,29 @@ paths:
       responses:
         '200':
           description: Success
+  /jobs:
+    get:
+      tags:
+        - jobs
+      summary: Returns a list of the most recent jobs
+      responses:
+        '200':
+          description: Success
+    post:
+      tags:
+        - jobs
+      summary: Submits a new job
+      responses:
+        '202':
+          description: Job submitted
+  /metadata:
+    get:
+      tags:
+        - metadata
+      summary: Returns the smart contract metadata
+      responses:
+        '200':
+          description: Success
   /transactions:
     get:
       tags:
@@ -35,10 +62,3 @@ paths:
       responses:
         '200':
           description: Success
-    post:
-      tags:
-        - transactions
-      summary: Submits a new transaction
-      responses:
-        '202':
-          description: Transaction submitted
