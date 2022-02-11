@@ -1,0 +1,119 @@
+// Demo file for use with REST Client for Visual Studio Code
+// See https://github.com/Huachao/vscode-restclient
+// 
+// Edit the values below to match your environment if required
+@hostname = localhost
+@port = {{$dotenv PORT}}
+@baseUrl = http://{{hostname}}:{{port}}
+@apiUrl = {{baseUrl}}/api
+@api-key = {{$dotenv ORG1_APIKEY}}
+
+### Check the server is ready
+
+GET {{baseUrl}}/ready HTTP/1.1
+
+### Check the server is still live
+
+GET {{baseUrl}}/live HTTP/1.1
+
+### Get chaincode metadata
+
+GET {{apiUrl}}/metadata HTTP/1.1
+X-Api-Key: {{api-key}}
+
+### Get all jobs
+
+GET {{apiUrl}}/jobs HTTP/1.1
+X-Api-Key: {{api-key}}
+
+### Read job status
+
+GET {{apiUrl}}/jobs/__job_id__ HTTP/1.1
+X-Api-Key: {{api-key}}
+
+### Get all assets
+
+POST {{apiUrl}}/jobs HTTP/1.1
+content-type: application/json
+X-Api-Key: {{api-key}}
+
+{
+    "transaction": "GetAllAssets",
+    "submit": false,
+    "arguments": []
+}
+
+### Check if asset exists
+
+POST {{apiUrl}}/jobs HTTP/1.1
+content-type: application/json
+X-Api-Key: {{api-key}}
+
+{
+    "transaction": "AssetExists",
+    "submit": false,
+    "arguments": [
+        "asset7"
+    ]
+}
+
+### Create asset
+
+POST {{apiUrl}}/jobs HTTP/1.1
+content-type: application/json
+X-Api-Key: {{api-key}}
+
+{
+    "transaction": "CreateAsset",
+    "submit": true,
+    "arguments": [
+        "asset7",
+        "red",
+        "42",
+        "Jean",
+        "101"
+    ]
+}
+
+### Read transaction status
+
+GET {{apiUrl}}/transactions/__transaction_id__ HTTP/1.1
+X-Api-Key: {{api-key}}
+
+### Read asset
+
+GET {{apiUrl}}/assets/asset7 HTTP/1.1
+X-Api-Key: {{api-key}}
+
+### Update asset
+
+PUT {{apiUrl}}/assets/asset7 HTTP/1.1
+content-type: application/json
+X-Api-Key: {{api-key}}
+
+{
+    "id": "asset7",
+    "color": "red",
+    "size": 11,
+    "owner": "Jean",
+    "appraisedValue": 101
+}
+
+### Transfer asset
+
+PATCH {{apiUrl}}/assets/asset7 HTTP/1.1
+content-type: application/json
+X-Api-Key: {{api-key}}
+
+[
+    {
+        "op": "replace",
+        "path": "/owner",
+        "value": "Ashleigh"
+    }
+]
+
+### Delete asset
+
+DELETE {{apiUrl}}/assets/asset7 HTTP/1.1
+X-Api-Key: {{api-key}}
